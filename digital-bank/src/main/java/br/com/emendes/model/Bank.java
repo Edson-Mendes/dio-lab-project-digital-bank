@@ -1,6 +1,5 @@
 package br.com.emendes.model;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,7 +8,7 @@ import java.util.Set;
  */
 public class Bank {
 
-  private String name;
+  private final String name;
   private Set<Account> accounts;
 
   public Bank(String name) {

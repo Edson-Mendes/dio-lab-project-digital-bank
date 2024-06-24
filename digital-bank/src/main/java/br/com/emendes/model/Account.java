@@ -11,10 +11,10 @@ public abstract class Account implements IAccount {
   private static final int DEFAULT_BRANCH = 1;
   private static int numberSequence = 1000;
 
-  protected int branch;
-  protected int number;
+  protected final int branch;
+  protected final int number;
+  protected final Client client;
   protected double balance;
-  protected Client client;
 
   protected Account(Client client) {
     this.client = client;
@@ -36,6 +36,20 @@ public abstract class Account implements IAccount {
   @Override
   public void transfer(double value, IAccount receiverAccount) {
     checkMoneyValue(value);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Account account = (Account) o;
+    return number == account.number;
+  }
+
+  @Override
+  public int hashCode() {
+    return number;
   }
 
   /**
