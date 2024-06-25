@@ -74,8 +74,8 @@ public abstract class Account implements IAccount {
    * @throws IllegalArgumentException caso o value não seja válido.
    */
   private static void checkMoneyValue(double value) {
-    if (moneyValidator(value)) {
-      throw new IllegalArgumentException("value must not be negative or zero.");
+    if (!moneyValidator(value)) {
+      throw new IllegalArgumentException("value must not be negative or zero. you type: " + value);
     }
   }
 
@@ -86,7 +86,7 @@ public abstract class Account implements IAccount {
    * @return {@code true} se value for válido, {@code false} caso contrário.
    */
   private static boolean moneyValidator(double value) {
-    return value > 0;
+    return value > 0.0;
   }
 
 }

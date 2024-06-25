@@ -25,7 +25,7 @@ public class AccountMenu {
 
       System.out.printf(optionsMessage, headerMessage);
       option = getOption();
-      if (option != 0) executeOption(option);
+      if (option != 0) executeOption(option, account);
     } while (option != 0);
   }
 
@@ -35,14 +35,26 @@ public class AccountMenu {
     return Integer.valueOf(option);
   }
 
-  private void executeOption(int option) {
+  private void executeOption(int option, Account account) {
     switch (option) {
-      case 1 -> System.out.println("withdraw money");
+      case 1 -> withdrawMoney(account);
       case 2 -> System.out.println("deposit money");
       case 3 -> System.out.println("transfer money");
       case 4 -> System.out.println("print extract");
       default -> System.err.println("invalid option");
     }
+  }
+
+  private void withdrawMoney(Account account) {
+    double value = Double.parseDouble(getInput("Enter value to withdraw: "));
+
+    account.withdraw(value);
+    System.out.printf("You withdraw U$ %.2f successfully.%n%n", value);
+  }
+
+  private String getInput(String inputLabel) {
+    System.out.print(inputLabel);
+    return input.nextLine();
   }
 
 }
