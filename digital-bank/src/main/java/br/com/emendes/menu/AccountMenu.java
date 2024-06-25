@@ -38,7 +38,7 @@ public class AccountMenu {
   private void executeOption(int option, Account account) {
     switch (option) {
       case 1 -> withdrawMoney(account);
-      case 2 -> System.out.println("deposit money");
+      case 2 -> depositMoney(account);
       case 3 -> System.out.println("transfer money");
       case 4 -> System.out.println("print extract");
       default -> System.err.println("invalid option");
@@ -50,6 +50,13 @@ public class AccountMenu {
 
     account.withdraw(value);
     System.out.printf("You withdraw U$ %.2f successfully.%n%n", value);
+  }
+
+  private void depositMoney(Account account) {
+    double value = Double.parseDouble(getInput("Enter value to deposit: "));
+
+    account.deposit(value);
+    System.out.printf("You deposit U$ %.2f successfully.%n%n", value);
   }
 
   private String getInput(String inputLabel) {
