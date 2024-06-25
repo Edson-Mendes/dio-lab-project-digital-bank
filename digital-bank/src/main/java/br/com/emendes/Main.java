@@ -13,7 +13,7 @@ public class Main {
 
   public static void main(String[] args) {
     Bank bank = new Bank("Our Bank");
-    AccountMenu accountMenu = new AccountMenu();
+    AccountMenu accountMenu = new AccountMenu(bank);
     AccountService accountService = new AccountService(bank, accountMenu);
 
     InitialMenu initialMenu = new InitialMenu(bank, accountService);

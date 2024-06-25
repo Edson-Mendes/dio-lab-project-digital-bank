@@ -1,13 +1,18 @@
 package br.com.emendes.menu;
 
 import br.com.emendes.model.Account;
+import br.com.emendes.model.Bank;
+import lombok.RequiredArgsConstructor;
 
 import static br.com.emendes.Main.input;
 
 /**
  * Classe que representa o menu da conta bancaria.
  */
+@RequiredArgsConstructor
 public class AccountMenu {
+
+  private final Bank bank;
 
   public void showOptions(Account account) {
     int option = 0;
@@ -39,7 +44,7 @@ public class AccountMenu {
     switch (option) {
       case 1 -> withdrawMoney(account);
       case 2 -> depositMoney(account);
-      case 3 -> System.out.println("transfer money");
+      case 3 -> transferMoney(account);
       case 4 -> System.out.println("print extract");
       default -> System.err.println("invalid option");
     }
@@ -49,14 +54,25 @@ public class AccountMenu {
     double value = Double.parseDouble(getInput("Enter value to withdraw: "));
 
     account.withdraw(value);
-    System.out.printf("You withdraw U$ %.2f successfully.%n%n", value);
+    System.out.printf("%s withdraw U$ %.2f successfully.%n%n", account.getClient().getName(), value);
   }
 
   private void depositMoney(Account account) {
     double value = Double.parseDouble(getInput("Enter value to deposit: "));
 
     account.deposit(value);
-    System.out.printf("You deposit U$ %.2f successfully.%n%n", value);
+    System.out.printf("%s deposit U$ %.2f successfully.%n%n", account.getClient().getName(), value);
+  }
+
+  private void transferMoney(Account account) {
+    int accountNumberDestiny = Integer.parseInt(getInput("Enter account number destiny: "));
+    Account destinyAccount = bank.getAccountByNumber(accountNumberDestiny);
+
+    double value = Double.parseDouble(getInput("Enter value to withdraw: "));
+    account.transfer(value, destinyAccount);
+
+    System.out.printf("%s transfer U$ %.2f successfully to %s.%n%n",
+        account.getClient().getName(), value, destinyAccount.getClient().getName());
   }
 
   private String getInput(String inputLabel) {
