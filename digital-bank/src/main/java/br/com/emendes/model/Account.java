@@ -26,16 +26,21 @@ public abstract class Account implements IAccount {
   @Override
   public void withdraw(double value) {
     checkMoneyValue(value);
+//    checkBalance(value);
+    balance -= value;
   }
 
   @Override
   public void deposit(double value) {
     checkMoneyValue(value);
+    balance += value;
   }
 
   @Override
   public void transfer(double value, IAccount receiverAccount) {
     checkMoneyValue(value);
+    this.withdraw(value);
+    receiverAccount.deposit(value);
   }
 
   @Override

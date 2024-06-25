@@ -4,7 +4,7 @@ import br.com.emendes.model.Bank;
 import br.com.emendes.service.AccountService;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Scanner;
+import static br.com.emendes.Main.input;
 
 /**
  * Classe que representa o menu de acesso inicial.
@@ -14,7 +14,6 @@ public class InitialMenu {
 
   private final Bank bank;
   private final AccountService accountService;
-  private final Scanner input = new Scanner(System.in);
 
   public void showOptions() {
     int option = 0;
@@ -29,10 +28,8 @@ public class InitialMenu {
 
       System.out.printf(optionsMessage, bank.getName());
       option = getOption();
-      executeOption(option);
+      if (option != 0) executeOption(option);
     } while (option != 0);
-
-    input.close();
   }
 
   private int getOption() {
@@ -44,7 +41,7 @@ public class InitialMenu {
   private void executeOption(int option) {
     switch (option) {
       case 1 -> accountService.createAccount();
-      case 2 -> System.out.println("Access account");
+      case 2 -> accountService.accessAccount();
       default -> System.err.println("invalid option");
     }
   }
