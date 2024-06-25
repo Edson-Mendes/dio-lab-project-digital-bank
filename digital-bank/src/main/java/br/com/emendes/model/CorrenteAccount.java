@@ -11,10 +11,9 @@ public class CorrenteAccount extends Account {
 
   @Override
   public void printBankStatement() {
-    System.out.println("-----------------------");
     System.out.println("=== Extrato Conta Corrente ===");
     super.showAccountInfo();
-    System.out.println("-----------------------");
+    System.out.println("=============================");
   }
 
 }

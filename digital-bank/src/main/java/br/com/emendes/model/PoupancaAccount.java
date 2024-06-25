@@ -11,10 +11,9 @@ public class PoupancaAccount extends Account {
 
   @Override
   public void printBankStatement() {
-    System.out.println("-----------------------");
     System.out.println("=== Extrato Conta Poupança ===");
     super.showAccountInfo();
-    System.out.println("-----------------------");
+    System.out.println("=============================");
   }
 
 }

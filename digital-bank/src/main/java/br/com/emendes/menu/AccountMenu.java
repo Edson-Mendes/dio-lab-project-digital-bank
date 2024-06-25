@@ -45,7 +45,7 @@ public class AccountMenu {
       case 1 -> withdrawMoney(account);
       case 2 -> depositMoney(account);
       case 3 -> transferMoney(account);
-      case 4 -> System.out.println("print extract");
+      case 4 -> printExtract(account);
       default -> System.err.println("invalid option");
     }
   }
@@ -73,6 +73,10 @@ public class AccountMenu {
 
     System.out.printf("%s transfer U$ %.2f successfully to %s.%n%n",
         account.getClient().getName(), value, destinyAccount.getClient().getName());
+  }
+
+  private void printExtract(Account account) {
+    account.printBankStatement();
   }
 
   private String getInput(String inputLabel) {
